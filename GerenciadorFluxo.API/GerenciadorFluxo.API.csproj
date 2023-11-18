@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\GerenciadorFluxo.Application\GerenciadorFluxo.Application.csproj" />
+    <ProjectReference Include="..\GerenciadorFluxo.Infra.IoC\GerenciadorFluxo.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>

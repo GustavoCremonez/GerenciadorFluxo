@@ -7,6 +7,7 @@
             Id = id;
             Nome = nome;
             Descricao = descricao;
+            Processos = new List<Processo>();
         }
 
         protected Fluxo()
@@ -19,6 +20,6 @@
 
         public string Descricao { get; private set; }
 
-        public ICollection<Processo> Processos { get; set; }
+        public List<Processo>? Processos { get; private set; }
     }
 }
