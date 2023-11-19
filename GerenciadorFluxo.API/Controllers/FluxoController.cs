@@ -87,7 +87,7 @@ namespace GerenciadorFluxo.API.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(int id)
