@@ -10,8 +10,6 @@ namespace GerenciadorFluxo.Infra.Data.EntitiesConfigurations
         {
             builder.HasIndex("Id");
 
-            builder.Property(a => a.Id).HasColumnName("Id");
-            builder.Property(a => a.IdProcesso).HasColumnName("IdProcesso");
             builder.Property(a => a.Descricao).HasColumnType("varchar").HasMaxLength(250).HasColumnName("Descricao");
         }
     }

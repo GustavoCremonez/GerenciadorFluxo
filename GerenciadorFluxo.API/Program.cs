@@ -1,4 +1,5 @@
 using GerenciadorFluxo.Infra.IoC;
+using Newtonsoft.Json;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,11 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services
     .AddControllers()
-    .AddNewtonsoftJson();
+    .AddNewtonsoftJson(
+    opt =>
+    {
+        opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

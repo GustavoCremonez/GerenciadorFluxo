@@ -4,6 +4,7 @@ using GerenciadorFluxo.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciadorFluxo.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231120185136_CorrigindoFKProcesso")]
+    partial class CorrigindoFKProcesso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,8 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -37,7 +40,8 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                         .HasColumnName("Descricao");
 
                     b.Property<int>("IdProcesso")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("IdProcesso");
 
                     b.HasKey("Id");
 
@@ -52,7 +56,8 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -73,35 +78,24 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                     b.HasIndex("Id");
 
                     b.ToTable("Fluxos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Descricao = "Fluxo destinado para o controle dos processos de vendas",
-                            Nome = "Fluxo de vendas"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Descricao = "Fluxo destinado para o controle dos processos de people",
-                            Nome = "Fluxo de people"
-                        });
                 });
 
             modelBuilder.Entity("GerenciadorFluxo.Domain.Entities.Processo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("IdFluxo")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("IdFluxo");
 
                     b.Property<int?>("IdProcessoSuperior")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("IdProcessoSuperior");
 
                     b.Property<string>("Nome")
                         .IsRequired()

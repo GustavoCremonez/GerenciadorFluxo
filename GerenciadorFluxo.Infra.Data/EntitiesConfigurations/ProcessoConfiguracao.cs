@@ -10,9 +10,6 @@ namespace GerenciadorFluxo.Infra.Data.EntitiesConfigurations
         {
             builder.HasIndex(p => p.Id);
 
-            builder.Property(p => p.Id).HasColumnName("Id");
-            builder.Property(p => p.IdProcessoSuperior).HasColumnName("IdProcessoSuperior");
-            builder.Property(p => p.IdFluxo).HasColumnName("IdFluxo");
             builder.Property(p => p.Nome).HasColumnType("varchar").HasMaxLength(50).HasColumnName("Nome");
             builder.Property(p => p.TipoProcesso).HasColumnType("tinyint ").HasColumnName("TipoProcesso");
 

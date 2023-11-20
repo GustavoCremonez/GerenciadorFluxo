@@ -10,15 +10,19 @@ namespace GerenciadorFluxo.Infra.Data.EntitiesConfigurations
         {
             builder.HasIndex(f => f.Id);
 
-            builder.Property(f => f.Id).HasColumnName("Id");
             builder.Property(f => f.Nome).HasColumnType("varchar").HasMaxLength(50).HasColumnName("Nome");
             builder.Property(f => f.Descricao).HasColumnType("varchar").HasMaxLength(250).HasColumnName("Descricao");
 
             builder.HasMany(f => f.Processos)
                 .WithOne(p => p.Fluxo)
-                .HasForeignKey(p => p.Id)
+                .HasForeignKey(p => p.IdFluxo)
                 .HasConstraintName("IdFluxo")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasData(
+                new(1, "Fluxo de vendas", "Fluxo destinado para o controle dos processos de vendas"),
+                    new(2, "Fluxo de people", "Fluxo destinado para o controle dos processos de people")
+                );
         }
     }
 }

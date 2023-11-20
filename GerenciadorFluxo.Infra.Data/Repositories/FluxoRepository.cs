@@ -2,7 +2,6 @@
 using GerenciadorFluxo.Domain.Entities;
 using GerenciadorFluxo.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace GerenciadorFluxo.Infra.Data.Repositories
 {
@@ -17,12 +16,17 @@ namespace GerenciadorFluxo.Infra.Data.Repositories
 
         public async Task<ICollection<Fluxo>> GetAllAsync()
         {
-            return await _context.Fluxos.ToListAsync();
+            return await _context.Fluxos
+                .Include(f => f.Processos)
+                .OrderByDescending(f => f.Id)
+                .ToListAsync();
         }
 
         public async Task<Fluxo> GetByIdAsync(int id)
         {
-            return await _context.Fluxos.SingleAsync(f => f.Id == id);
+            return await _context.Fluxos
+                .Include(navigationPropertyPath: f => f.Processos)
+                .SingleAsync(f => f.Id == id);
         }
 
         public async Task<int> CreateAsync(Fluxo entity)
