@@ -13,8 +13,6 @@ namespace GerenciadorFluxo.Infra.Data.Context
 
         public DbSet<Processo> Processos { get; set; }
 
-        public DbSet<Anotacao> Anotacoes { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -13,11 +13,6 @@ namespace GerenciadorFluxo.Infra.Data.EntitiesConfigurations
             builder.Property(p => p.Nome).HasColumnType("varchar").HasMaxLength(50).HasColumnName("Nome");
             builder.Property(p => p.TipoProcesso).HasColumnType("tinyint ").HasColumnName("TipoProcesso");
 
-            builder.HasMany(p => p.Anotacoes)
-                .WithOne(a => a.Processo)
-                .HasForeignKey(a => a.IdProcesso)
-                .HasConstraintName("IdProcesso");
-
             builder.HasMany(p => p.SubProcessos)
                 .WithOne(sb => sb.ProcessoSuperior)
                 .HasForeignKey(x => x.IdProcessoSuperior)

@@ -30,7 +30,5 @@ namespace GerenciadorFluxo.Domain.Entities
         public Processo ProcessoSuperior { get; set; }
 
         public List<Processo> SubProcessos { get; set; }
-
-        public List<Anotacao> Anotacoes { get; set; }
     }
 }

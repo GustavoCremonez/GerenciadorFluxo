@@ -10,7 +10,6 @@ namespace GerenciadorFluxo.Application.Services
         {
             CreateMap<Fluxo, FluxoDto>().ReverseMap();
             CreateMap<Processo, ProcessoDto>().ReverseMap();
-            CreateMap<Anotacao, AnotacaoDto>().ReverseMap();
         }
     }
 }

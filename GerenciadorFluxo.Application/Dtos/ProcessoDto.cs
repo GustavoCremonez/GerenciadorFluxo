@@ -16,7 +16,5 @@ namespace GerenciadorFluxo.Application.Dtos
         public TipoProcesso TipoProcesso { get; set; }
 
         public List<ProcessoDto>? SubProcessos { get; set; }
-
-        public List<Anotacao>? Anotacoes { get; set; }
     }
 }

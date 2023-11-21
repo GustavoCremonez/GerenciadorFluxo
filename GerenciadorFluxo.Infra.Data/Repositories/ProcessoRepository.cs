@@ -22,7 +22,6 @@ namespace GerenciadorFluxo.Infra.Data.Repositories
         public async Task<List<Processo>> GetByFluxoAsync(int idFluxo)
         {
             List<Processo> processos = await _context.Processos
-               .Include(p => p.Anotacoes)
                .Where(p => p.IdFluxo == idFluxo)
                .OrderBy(x => x.Id)
                .ToListAsync();
