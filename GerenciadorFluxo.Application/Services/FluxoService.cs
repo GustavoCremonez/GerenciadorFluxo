@@ -37,7 +37,11 @@ namespace GerenciadorFluxo.Application.Services
 
         public async Task UpdateAsync(FluxoDto dto)
         {
-            Fluxo entity = _mapper.Map<Fluxo>(dto);
+            Fluxo entity = await _fluxoRepository.GetByIdAsync(dto.Id);
+
+            entity.Nome = dto.Nome;
+            entity.Descricao = dto.Descricao;
+
             await _fluxoRepository.UpdateAsync(entity);
         }
 

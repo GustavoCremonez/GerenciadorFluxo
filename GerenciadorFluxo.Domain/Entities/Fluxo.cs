@@ -11,12 +11,12 @@
 
         public Fluxo() { }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public string Nome { get; private set; }
+        public string Nome { get; set; }
 
-        public string Descricao { get; private set; }
+        public string Descricao { get; set; }
 
-        public List<Processo> Processos { get; private set; }
+        public List<Processo> Processos { get; set; }
     }
 }

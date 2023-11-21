@@ -17,6 +17,11 @@ namespace GerenciadorFluxo.Infra.Data.EntitiesConfigurations
                 .WithOne(a => a.Processo)
                 .HasForeignKey(a => a.IdProcesso)
                 .HasConstraintName("IdProcesso");
+
+            builder.HasMany(p => p.SubProcessos)
+                .WithOne(sb => sb.ProcessoSuperior)
+                .HasForeignKey(x => x.IdProcessoSuperior)
+                .HasConstraintName("IdProcessoSuperior");
         }
     }
 }

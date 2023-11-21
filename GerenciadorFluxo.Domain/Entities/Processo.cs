@@ -12,20 +12,25 @@ namespace GerenciadorFluxo.Domain.Entities
             TipoProcesso = tipoProcesso;
         }
 
-        public Processo() { }
+        public Processo()
+        { }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public int IdFluxo { get; private set; }
+        public int IdFluxo { get; set; }
 
-        public Fluxo Fluxo { get; private set; }
+        public Fluxo Fluxo { get; set; }
 
-        public int? IdProcessoSuperior { get; private set; }
+        public int? IdProcessoSuperior { get; set; }
 
-        public string Nome { get; private set; }
+        public string Nome { get; set; }
 
-        public TipoProcesso TipoProcesso { get; private set; }
+        public TipoProcesso TipoProcesso { get; set; }
 
-        public List<Anotacao> Anotacoes { get; private set; }
+        public Processo ProcessoSuperior { get; set; }
+
+        public List<Processo> SubProcessos { get; set; }
+
+        public List<Anotacao> Anotacoes { get; set; }
     }
 }

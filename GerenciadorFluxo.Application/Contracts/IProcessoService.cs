@@ -7,7 +7,7 @@ namespace GerenciadorFluxo.Application.Contracts
     {
         Task<ProcessoDto> GetAsync(int id);
 
-        Task<List<ProcessoDto>> GetByFluxoAsync(int idFluxo);
+        Task<RetornoProcessosDto> GetByFluxoAsync(int idFluxo);
 
         Task CreateAsync(ProcessoDto entity);
 

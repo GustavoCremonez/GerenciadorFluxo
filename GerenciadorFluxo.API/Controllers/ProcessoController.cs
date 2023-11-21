@@ -39,7 +39,7 @@ namespace GerenciadorFluxo.API.Controllers
         {
             try
             {
-                List<ProcessoDto> processos = await _processoService.GetByFluxoAsync(id);
+                RetornoProcessosDto processos = await _processoService.GetByFluxoAsync(id);
 
                 return Ok(processos);
             }

@@ -9,11 +9,13 @@ namespace GerenciadorFluxo.Application.Services
     public class ProcessoService : IProcessoService
     {
         private readonly IProcessoRepository _processoRepository;
+        private readonly IFluxoRepository _fluxoRepository;
         private readonly IMapper _mapper;
 
-        public ProcessoService(IProcessoRepository processoRepository, IMapper mapper)
+        public ProcessoService(IProcessoRepository processoRepository, IFluxoRepository fluxoRepository, IMapper mapper)
         {
             _processoRepository = processoRepository;
+            _fluxoRepository = fluxoRepository;
             _mapper = mapper;
         }
 
@@ -23,10 +25,17 @@ namespace GerenciadorFluxo.Application.Services
             return _mapper.Map<ProcessoDto>(processo);
         }
 
-        public async Task<List<ProcessoDto>> GetByFluxoAsync(int idFluxo)
+        public async Task<RetornoProcessosDto> GetByFluxoAsync(int idFluxo)
         {
+            RetornoProcessosDto retorno = new();
             List<Processo> processos = await _processoRepository.GetByFluxoAsync(idFluxo);
-            return _mapper.Map<List<ProcessoDto>>(processos);
+
+            retorno.Processos = _mapper.Map<List<ProcessoDto>>(processos);
+
+            Fluxo fluxo = await _fluxoRepository.GetByIdAsync(idFluxo);
+            retorno.TituloFluxo = fluxo.Nome;
+
+            return retorno;
         }
 
         public async Task CreateAsync(ProcessoDto dto)
@@ -37,7 +46,11 @@ namespace GerenciadorFluxo.Application.Services
 
         public async Task UpdateAsync(ProcessoDto dto)
         {
-            Processo processo = _mapper.Map<Processo>(dto);
+            Processo processo = await _processoRepository.GetAsync(dto.Id);
+
+            processo.Nome = dto.Nome;
+            processo.TipoProcesso = dto.TipoProcesso;
+
             await _processoRepository.UpdateAsync(processo);
         }
 

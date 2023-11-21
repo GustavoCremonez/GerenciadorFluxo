@@ -21,11 +21,20 @@ namespace GerenciadorFluxo.Infra.Data.Repositories
 
         public async Task<List<Processo>> GetByFluxoAsync(int idFluxo)
         {
-            return await _context.Processos
-                .Include(p => p.Anotacoes)
-                .Where(p => p.IdFluxo == idFluxo)
-                .OrderByDescending(p => p.Id)
-                .ToListAsync();
+            List<Processo> processos = await _context.Processos
+               .Include(p => p.Anotacoes)
+               .Where(p => p.IdFluxo == idFluxo)
+               .OrderBy(x => x.Id)
+               .ToListAsync();
+
+            processos.ForEach(p =>
+            {
+                p.SubProcessos = processos.Where(sp => sp.IdProcessoSuperior == p.Id).ToList();
+            });
+
+            processos = processos.Where(x => x.IdProcessoSuperior == null).ToList();
+
+            return processos;
         }
 
         public async Task CreateAsync(Processo entity)
