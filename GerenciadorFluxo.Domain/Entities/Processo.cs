@@ -2,33 +2,30 @@
 
 namespace GerenciadorFluxo.Domain.Entities
 {
-    public class Processo
+    public sealed class Processo
     {
-        public Processo(int id, int? idProcessoSuperior, int idFluxo, string nome, TipoProcesso tipoProcesso)
+        public Processo(int idFluxo, int? idProcessoSuperior, string nome, TipoProcesso tipoProcesso)
         {
-            Id = id;
-            IdProcessoSuperior = idProcessoSuperior;
             IdFluxo = idFluxo;
+            IdProcessoSuperior = idProcessoSuperior;
             Nome = nome;
             TipoProcesso = tipoProcesso;
         }
 
-        protected Processo()
-        {
-        }
+        public Processo() { }
 
         public int Id { get; private set; }
 
-        public int? IdProcessoSuperior { get; set; }
+        public int IdFluxo { get; private set; }
 
-        public int IdFluxo { get; set; }
+        public Fluxo Fluxo { get; private set; }
 
-        public Fluxo Fluxo { get; set; }
+        public int? IdProcessoSuperior { get; private set; }
 
         public string Nome { get; private set; }
 
-        public TipoProcesso TipoProcesso { get; set; }
+        public TipoProcesso TipoProcesso { get; private set; }
 
-        public ICollection<Anotacao> Anotacoes { get; private set; }
+        public List<Anotacao> Anotacoes { get; private set; }
     }
 }

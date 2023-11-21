@@ -73,20 +73,6 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                     b.HasIndex("Id");
 
                     b.ToTable("Fluxos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Descricao = "Fluxo destinado para o controle dos processos de vendas",
-                            Nome = "Fluxo de vendas"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Descricao = "Fluxo destinado para o controle dos processos de people",
-                            Nome = "Fluxo de people"
-                        });
                 });
 
             modelBuilder.Entity("GerenciadorFluxo.Domain.Entities.Processo", b =>

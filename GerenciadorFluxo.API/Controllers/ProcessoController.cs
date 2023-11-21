@@ -6,14 +6,13 @@ namespace GerenciadorFluxo.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Consumes(contentType: "application/json")]
-    public class FluxoController : ControllerBase
+    public class ProcessoController : Controller
     {
-        private readonly IFluxoService _fluxoService;
+        private readonly IProcessoService _processoService;
 
-        public FluxoController(IFluxoService fluxoService)
+        public ProcessoController(IProcessoService processoService)
         {
-            _fluxoService = fluxoService;
+            _processoService = processoService;
         }
 
         [HttpGet("{id}")]
@@ -23,9 +22,8 @@ namespace GerenciadorFluxo.API.Controllers
         {
             try
             {
-                FluxoDto entity = await _fluxoService.GetByIdAsync(id);
-
-                return Ok(entity);
+                ProcessoDto processo = await _processoService.GetAsync(id);
+                return Ok(processo);
             }
             catch (Exception ex)
             {
@@ -34,18 +32,16 @@ namespace GerenciadorFluxo.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetByFluxo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetByFluxo(int id)
         {
             try
             {
-                ICollection<FluxoDto> result = await _fluxoService.GetAllAsync();
-                if (result.Any())
-                    return Ok(result);
-                else
-                    return NoContent();
+                List<ProcessoDto> processos = await _processoService.GetByFluxoAsync(id);
+
+                return Ok(processos);
             }
             catch (Exception ex)
             {
@@ -56,11 +52,11 @@ namespace GerenciadorFluxo.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post(FluxoDto dto)
+        public async Task<IActionResult> Post(ProcessoDto dto)
         {
             try
             {
-                await _fluxoService.CreateAsync(dto);
+                await _processoService.CreateAsync(dto);
 
                 return NoContent();
             }
@@ -73,11 +69,11 @@ namespace GerenciadorFluxo.API.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Put(FluxoDto dto)
+        public async Task<IActionResult> Put(ProcessoDto dto)
         {
             try
             {
-                await _fluxoService.UpdateAsync(dto);
+                await _processoService.UpdateAsync(dto);
 
                 return NoContent();
             }
@@ -87,14 +83,14 @@ namespace GerenciadorFluxo.API.Controllers
             }
         }
 
-        [HttpDelete("id")]
+        [HttpDelete]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                await _fluxoService.DeleteAsync(id);
+                await _processoService.DeleteAsync(id);
                 return NoContent();
             }
             catch (Exception ex)

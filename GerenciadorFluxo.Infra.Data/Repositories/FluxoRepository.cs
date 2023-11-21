@@ -14,7 +14,7 @@ namespace GerenciadorFluxo.Infra.Data.Repositories
             _context = context;
         }
 
-        public async Task<ICollection<Fluxo>> GetAllAsync()
+        public async Task<List<Fluxo>> GetAllAsync()
         {
             return await _context.Fluxos
                 .Include(f => f.Processos)
@@ -25,29 +25,25 @@ namespace GerenciadorFluxo.Infra.Data.Repositories
         public async Task<Fluxo> GetByIdAsync(int id)
         {
             return await _context.Fluxos
-                .Include(navigationPropertyPath: f => f.Processos)
+                .Include(f => f.Processos)
                 .SingleAsync(f => f.Id == id);
         }
 
-        public async Task<int> CreateAsync(Fluxo entity)
+        public async Task CreateAsync(Fluxo entity)
         {
-            Fluxo createdEntity = _context.Add(entity).Entity;
+            _context.Add(entity);
             await _context.SaveChangesAsync();
-
-            return createdEntity.Id;
         }
 
-        public async Task<int> UpdateAsync(Fluxo entity)
+        public async Task UpdateAsync(Fluxo entity)
         {
-            Fluxo updatedEntity = _context.Update(entity).Entity;
+            _context.Update(entity);
             await _context.SaveChangesAsync();
-
-            return updatedEntity.Id;
         }
 
         public async Task DeleteAsync(int id)
         {
-            Fluxo entity = await _context.Fluxos.SingleAsync(f => f.Id == id);
+            Fluxo entity = await this.GetByIdAsync(id);
             _context.Remove(entity);
             await _context.SaveChangesAsync();
         }

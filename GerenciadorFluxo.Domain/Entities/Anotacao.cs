@@ -1,7 +1,9 @@
 ﻿namespace GerenciadorFluxo.Domain.Entities
 {
-    public class Anotacao
+    public sealed class Anotacao
     {
+        public Anotacao() { }
+
         public Anotacao(int id, int idProcesso, string descricao)
         {
             Id = id;
@@ -9,15 +11,11 @@
             Descricao = descricao;
         }
 
-        protected Anotacao()
-        {
-        }
-
         public int Id { get; private set; }
 
-        public int IdProcesso { get; set; }
+        public int IdProcesso { get; private set; }
 
-        public Processo Processo { get; set; }
+        public Processo Processo { get; private set; }
 
         public string Descricao { get; private set; }
     }

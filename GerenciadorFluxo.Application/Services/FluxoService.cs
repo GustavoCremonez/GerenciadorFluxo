@@ -1,4 +1,6 @@
-﻿using GerenciadorFluxo.Application.Contracts;
+﻿using AutoMapper;
+using GerenciadorFluxo.Application.Contracts;
+using GerenciadorFluxo.Application.Dtos;
 using GerenciadorFluxo.Domain.Contracts;
 using GerenciadorFluxo.Domain.Entities;
 
@@ -7,30 +9,36 @@ namespace GerenciadorFluxo.Application.Services
     public class FluxoService : IFluxoService
     {
         private readonly IFluxoRepository _fluxoRepository;
+        private readonly IMapper _mapper;
 
-        public FluxoService(IFluxoRepository fluxoRepository)
+        public FluxoService(IFluxoRepository fluxoRepository, IMapper mapper)
         {
             _fluxoRepository = fluxoRepository;
+            _mapper = mapper;
         }
 
-        public Task<ICollection<Fluxo>> GetAllAsync()
+        public async Task<List<FluxoDto>> GetAllAsync()
         {
-            return _fluxoRepository.GetAllAsync();
+            List<Fluxo> fluxos = await _fluxoRepository.GetAllAsync();
+            return _mapper.Map<List<FluxoDto>>(fluxos);
         }
 
-        public Task<Fluxo> GetByIdAsync(int id)
+        public async Task<FluxoDto> GetByIdAsync(int id)
         {
-            return _fluxoRepository.GetByIdAsync(id);
+            Fluxo fluxo = await _fluxoRepository.GetByIdAsync(id);
+            return _mapper.Map<FluxoDto>(fluxo);
         }
 
-        public async Task<int> CreateAsync(Fluxo entity)
+        public async Task CreateAsync(FluxoDto dto)
         {
-            return await _fluxoRepository.CreateAsync(entity);
+            Fluxo entity = _mapper.Map<Fluxo>(dto);
+            await _fluxoRepository.CreateAsync(entity);
         }
 
-        public async Task<int> UpdateAsync(Fluxo entity)
+        public async Task UpdateAsync(FluxoDto dto)
         {
-            return await _fluxoRepository.UpdateAsync(entity);
+            Fluxo entity = _mapper.Map<Fluxo>(dto);
+            await _fluxoRepository.UpdateAsync(entity);
         }
 
         public async Task DeleteAsync(int id)

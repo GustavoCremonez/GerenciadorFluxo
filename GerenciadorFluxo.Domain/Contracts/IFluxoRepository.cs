@@ -6,11 +6,11 @@ namespace GerenciadorFluxo.Domain.Contracts
     {
         Task<Fluxo> GetByIdAsync(int id);
 
-        Task<ICollection<Fluxo>> GetAllAsync();
+        Task<List<Fluxo>> GetAllAsync();
 
-        Task<int> CreateAsync(Fluxo entity);
+        Task CreateAsync(Fluxo entity);
 
-        Task<int> UpdateAsync(Fluxo entity);
+        Task UpdateAsync(Fluxo entity);
 
         Task DeleteAsync(int id);
     }

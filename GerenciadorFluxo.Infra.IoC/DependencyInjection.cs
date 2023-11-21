@@ -21,6 +21,10 @@ namespace GerenciadorFluxo.Infra.IoC
 
             services.AddScoped<IFluxoRepository, FluxoRepository>();
             services.AddScoped<IFluxoService, FluxoService>();
+            services.AddScoped<IProcessoRepository, ProcessoRepository>();
+            services.AddScoped<IProcessoService, ProcessoService>();
+
+            services.AddAutoMapper(typeof(MappingProfile));
 
             return services;
         }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciadorFluxo.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231120185136_CorrigindoFKProcesso")]
-    partial class CorrigindoFKProcesso
+    [Migration("20231121112557_CriacaoDasTabelas")]
+    partial class CriacaoDasTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,8 +28,7 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -40,8 +39,7 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                         .HasColumnName("Descricao");
 
                     b.Property<int>("IdProcesso")
-                        .HasColumnType("int")
-                        .HasColumnName("IdProcesso");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -56,8 +54,7 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -84,18 +81,15 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("IdFluxo")
-                        .HasColumnType("int")
-                        .HasColumnName("IdFluxo");
+                        .HasColumnType("int");
 
                     b.Property<int?>("IdProcessoSuperior")
-                        .HasColumnType("int")
-                        .HasColumnName("IdProcessoSuperior");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()

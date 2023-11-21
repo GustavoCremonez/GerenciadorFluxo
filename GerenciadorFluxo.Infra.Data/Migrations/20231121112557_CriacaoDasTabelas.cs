@@ -4,7 +4,7 @@
 
 namespace GerenciadorFluxo.Infra.Data.Migrations
 {
-    public partial class CriacaoDasTabelas_Fluxo_Processo_Anotacao : Migration
+    public partial class CriacaoDasTabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,9 +26,10 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                 name: "Processos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    IdProcessoSuperior = table.Column<int>(type: "int", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     IdFluxo = table.Column<int>(type: "int", nullable: false),
+                    IdProcessoSuperior = table.Column<int>(type: "int", nullable: true),
                     Nome = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     TipoProcesso = table.Column<byte>(type: "tinyint ", nullable: false)
                 },
@@ -37,7 +38,7 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                     table.PrimaryKey("PK_Processos", x => x.Id);
                     table.ForeignKey(
                         name: "IdFluxo",
-                        column: x => x.Id,
+                        column: x => x.IdFluxo,
                         principalTable: "Fluxos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -82,6 +83,11 @@ namespace GerenciadorFluxo.Infra.Data.Migrations
                 name: "IX_Processos_Id",
                 table: "Processos",
                 column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Processos_IdFluxo",
+                table: "Processos",
+                column: "IdFluxo");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

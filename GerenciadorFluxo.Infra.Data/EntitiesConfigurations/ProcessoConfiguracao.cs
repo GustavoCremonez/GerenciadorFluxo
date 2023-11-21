@@ -16,8 +16,7 @@ namespace GerenciadorFluxo.Infra.Data.EntitiesConfigurations
             builder.HasMany(p => p.Anotacoes)
                 .WithOne(a => a.Processo)
                 .HasForeignKey(a => a.IdProcesso)
-                .HasConstraintName("IdProcesso")
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasConstraintName("IdProcesso");
         }
     }
 }
