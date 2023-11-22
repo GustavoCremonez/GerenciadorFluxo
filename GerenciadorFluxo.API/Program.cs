@@ -1,4 +1,6 @@
+using GerenciadorFluxo.Infra.Data.Context;
 using GerenciadorFluxo.Infra.IoC;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
